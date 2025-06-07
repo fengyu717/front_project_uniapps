@@ -15,37 +15,32 @@
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#fff",
+    "selectedColor": "#6777fd",
     "backgroundColor": "#fff",
     "borderStyle": "black",
-    "height": "50px",
+    "height": "0px",
     "fontSize": "10px",
     "iconWidth": "24px",
     "spacing": "3px",
     "list": [
       {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/homeHL.png",
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": ""
       },
       {
-        "iconPath": "static/tabbar/example.png",
-        "selectedIconPath": "static/tabbar/exampleHL.png",
-        "pagePath": "pages/about/about",
-        "text": "关于"
+        "pagePath": "pages/task/task",
+        "text": ""
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": ""
       }
     ]
   },
   "pages": [
     {
-      "path": "pages/login/login",
-      "type": "home",
-      "layout": "default",
-      "style": {
-        "navigationBarTitleText": "1123123123",
-        "navigationStyle": ""
-      }
+      "path": "pages/index/index",
+      "type": "home"
     },
     {
       "path": "pages/about/about",
@@ -55,12 +50,24 @@
       }
     },
     {
-      "path": "pages/index/index",
+      "path": "pages/login/login",
+      "type": "page"
+    },
+    {
+      "path": "pages/task/task",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/user",
       "type": "page",
       "layout": "default",
       "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
       }
     }
   ],
