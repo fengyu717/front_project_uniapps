@@ -40,7 +40,12 @@
   "pages": [
     {
       "path": "pages/index/index",
-      "type": "home"
+      "type": "home",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom",
+        "backgroundColor": "#000"
+      }
     },
     {
       "path": "pages/about/about",
@@ -68,6 +73,24 @@
       "style": {
         "navigationBarTitleText": "",
         "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/otherpages/creationDirectory/creationDirectory",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom",
+        "backgroundColor": "#000"
+      }
+    },
+    {
+      "path": "pages/otherpages/newClips/newClips",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom",
+        "backgroundColor": "#000"
       }
     }
   ],

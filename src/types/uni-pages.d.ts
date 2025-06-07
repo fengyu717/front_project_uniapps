@@ -8,7 +8,9 @@ interface NavigateToOptions {
        "/pages/about/about" |
        "/pages/login/login" |
        "/pages/task/task" |
-       "/pages/user/user";
+       "/pages/user/user" |
+       "/pages/otherpages/creationDirectory/creationDirectory" |
+       "/pages/otherpages/newClips/newClips";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

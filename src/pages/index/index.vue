@@ -1,5 +1,14 @@
+<route lang="json5">
+{
+  style: {
+    navigationBarTitleText: '',
+    navigationStyle: 'custom',
+    backgroundColor: '#000',
+  },
+}
+</route>
 <template>
-  <view class="container min-h-screen w-full text-white bg-black">
+  <view class="min-h-screen w-full text-white bg-black">
     <!-- 顶部 Banner -->
     <view class="banner relative h-[260rpx]">
       <wd-swiper
@@ -16,6 +25,7 @@
     <!-- 三大功能按钮 -->
     <view class="main-features flex gap-[20rpx] p-2.5">
       <wd-img
+        @click="switchTab('/pages/otherpages/creationDirectory/creationDirectory')"
         :width="350"
         :height="168"
         src="https://cyt-digital.oss-cn-beijing.aliyuncs.com/static/home/icon-clip.png"
@@ -36,25 +46,33 @@
     </view>
 
     <!-- 图标菜单 -->
-    <wd-grid bg-color="rgba(0, 0, 0, 0.02)">
-      <wd-grid-item
-        v-for="item in 5"
-        :key="item"
-        icon="https://cyt-static.oss-cn-beijing.aliyuncs.com/digital_human/homeicon14.png"
-        text="团队频道"
-      />
-    </wd-grid>
+    <view class="grid grid-cols-5 gap-y-2 bg-[rgba(0,0,0,0.02)] mt-5">
+      <view
+        v-for="(item, index) in visibleItems"
+        :key="index"
+        class="flex flex-col items-center text-[0.7rem] relative mb-2"
+        @click="handleClick(index)"
+      >
+        <image :src="item.icon" class="w-6 h-6 my-2" />
+        <text>{{ item.text }}</text>
+        <view
+          class="absolute -top-2 right-3 text-white text-xs w-2 h-2 flex items-center justify-center"
+        >
+          new
+        </view>
+      </view>
+    </view>
 
     <!-- 我的数字人 -->
-    <view class="section px-2.5 mt-10">
+    <view class="section px-2.5 mt-5">
       <view class="section-header flex justify-between mb-5 text-[28rpx]">
         <text>我的数字人 0</text>
         <text class="more text-[24rpx] text-gray-500">全部 &gt;</text>
       </view>
-      <scroll-view scroll-x>
+      <view class="scrollbar-hide overflow-auto w-full">
         <view class="flex w-full">
           <view
-            class="avatar-card flex items-center w-[50vw] min-w-[27vw] h-[161px] mr-5 text-center rounded-[20rpx] bg-[url('https://cyt-static.oss-cn-beijing.aliyuncs.com/digital_human/add-image-item-bg.png')] bg-no-repeat bg-cover"
+            class="avatar-card flex items-center w-[50vw] min-w-[27vw] h-32 mr-5 text-center rounded-[20rpx] bg-[url('https://cyt-static.oss-cn-beijing.aliyuncs.com/digital_human/add-image-item-bg.png')] bg-no-repeat bg-cover"
             v-for="item in 5"
             :key="item"
           >
@@ -64,11 +82,11 @@
             </view>
           </view>
         </view>
-      </scroll-view>
+      </view>
     </view>
 
     <!-- 我的作品 -->
-    <view class="section px-2.5 mt-10">
+    <view class="section px-2.5 mt-5">
       <view class="section-header flex justify-between mb-5 text-[28rpx]">
         <text>我的作品 0</text>
         <text class="more text-[24rpx] text-gray-500">全部 &gt;</text>
@@ -80,7 +98,7 @@
     </view>
 
     <!-- 样片案例 -->
-    <view class="section px-2.5 mt-10">
+    <view class="section px-2.5 mt-5">
       <view class="section-header flex justify-between mb-5 text-[28rpx]">
         <text>样片案例 0</text>
         <text class="more text-[24rpx] text-gray-500">全部 &gt;</text>
@@ -92,15 +110,15 @@
     </view>
 
     <!-- 新手教程 -->
-    <view class="section px-2.5 mt-10">
+    <view class="section px-2.5 mt-5">
       <view class="section-header flex justify-between mb-5 text-[28rpx]">
         <text>新手教程</text>
         <text class="more text-[24rpx] text-gray-500">全部 &gt;</text>
       </view>
-      <scroll-view scroll-x>
-        <view class="flex w-full">
+      <view class="scrollbar-hide overflow-auto w-full">
+        <view class="flex min-w-max">
           <wd-img
-            class="card-news min-w-[45vw] mr-5"
+            class="card-news min-w-[47vw] mr-2.5"
             :width="200"
             :height="100"
             :src="item"
@@ -108,18 +126,18 @@
             :key="index"
           />
         </view>
-      </scroll-view>
+      </view>
     </view>
 
     <!-- AI智能体 -->
-    <view class="section px-2.5 mt-10">
+    <view class="section px-2.5 mt-5">
       <view class="section-header flex justify-between mb-5 text-[28rpx]">
         <text>AI智能体</text>
         <text class="more text-[24rpx] text-gray-500">全部 &gt;</text>
       </view>
       <view class="grid grid-cols-2 gap-2">
         <view
-          class="itemai flex items-center w-[98%] p-2 bg-[#1e1f24] box-border"
+          class="flex items-center w-[98%] p-2 bg-[#1e1f24] box-border"
           v-for="item in 10"
           :key="item"
         >
@@ -164,5 +182,39 @@ const swiperList1 = ref([
   '/static/images/png/4.png',
   '/static/images/png/4.png',
 ])
+const expanded = ref(false)
+
+// 所有项（最多10个）
+const fullList = Array.from({ length: 10 }, (_, i) => ({
+  icon: 'https://cyt-static.oss-cn-beijing.aliyuncs.com/digital_human/homeicon14.png',
+  text: i === 4 ? '展开' : `频道 ${i + 1}`,
+}))
+
+// 计算当前渲染的项
+const visibleItems = computed(() => {
+  return expanded.value ? fullList : fullList.slice(0, 5)
+})
+
+// 点击第 5 项（展开或收起）
+const handleClick = (index) => {
+  if (index === 4 && !expanded.value) {
+    expanded.value = true
+  } else if (index === 4 && expanded.value) {
+    expanded.value = false
+  }
+}
+
+function switchTab(path) {
+  uni.navigateTo({ url: path })
+}
 </script>
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
